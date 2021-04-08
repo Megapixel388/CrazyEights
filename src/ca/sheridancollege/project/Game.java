@@ -49,6 +49,7 @@ public abstract class Game {
     }
 
     public void setPlayer(int playerNumber, Player player) {
+        players.set(playerNumber, player);
     }
 
     public void addPlayer(Player player) {

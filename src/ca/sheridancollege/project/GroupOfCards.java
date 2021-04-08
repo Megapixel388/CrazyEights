@@ -44,6 +44,10 @@ public class GroupOfCards
         cards.add(card);
     }
     
+    public Card getCard(int cardNum) {
+        return cards.get(cardNum);
+    }
+    
     public void removeCard(Card card) {
         cards.remove(card);
     }

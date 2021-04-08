@@ -70,7 +70,12 @@ public class CrazyEights extends Game {
     public void deal() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < getNumPlayers(); j++) {
-                //Put code in here to give player j 1 card
+                setPlayer(j, //Set this player
+                        getPlayer(j).//to themselves but...
+                                setHand(//set their hand to...
+                                        (getPlayer(j). //the current player's
+                                        getHand(). //hand but
+                                                addCard(deck.pop())))); //Add a card to it off the top of the deck
             }
         }
     }
