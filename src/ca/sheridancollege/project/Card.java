@@ -16,7 +16,7 @@ package ca.sheridancollege.project;
 public class Card {
 
     //default modifier for child classes
-    private String suit; //clubs, spades, diamonds, hearts
+    private int suit; //clubs, spades, diamonds, hearts
     private int value;//1-13
     //private String valueString;
 
@@ -31,18 +31,22 @@ public class Card {
     public Card() {
     }
 
-    public Card(String suit, int value) {
+    public Card(int suit, int value) {
         this.suit = suit;
         this.value = value;
         //this.valueString = valueString;
     }
 
-    public void setSuit(int suitNum) {
-        suit = SUITS[suitNum];
+    public void setSuit(int suit) {
+        this.suit = suit;
     }
 
-    public String getSuit() {
+    public int getSuit() {
         return suit;
+    }
+    
+    public String getSuitName(int suit) {
+        return SUITS[suit];
     }
 
     public void setValue(int value) {
