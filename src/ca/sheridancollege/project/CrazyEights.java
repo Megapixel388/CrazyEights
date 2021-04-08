@@ -7,6 +7,7 @@ package ca.sheridancollege.project;
 
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.Scanner;
 
 /**
  *
@@ -17,64 +18,52 @@ public class CrazyEights extends Game {
     private Stack<Card> deck;
     private ArrayList<GroupOfCards> hands;
     private boolean isWinner;
+    private Scanner input;
 
     @Override
     public void play() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //This method calls other methods
-        isWinner = false;
-        setPlayers();
-        createDeck();
-//        GroupOfCards hand0 = new GroupOfCards(1);
-//        GroupOfCards hand1 = new GroupOfCards(1);
-//        hands.add(hand0);
-//        hands.add(hand1);
-//        hand0.addCard(deck.pop());
-//        hand1.addCard(deck.pop());
+        isWinner = false;   //This will update when a player wins
+        setPlayers();       //Adds players to the game
+        createDeck();       //Creates the deck
         turn(0);
     }
 
     @Override
     public void declareWinner() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void setPlayers() {
-        Player player1 = new Player("Alice");
-        addPlayer(player1);
-        Player player2 = new Player("Bob");
-        addPlayer(player2);
+        int playerNum = 0;         //Keeps track of how many players there are
+        String playerName = "";
+        System.out.println("Type 'End' to stop adding players");
+
+        while (!(playerName.equalsIgnoreCase("end")) && playerNum < 6) { //Adds  players until the user types end or maximum is reached
+            if (playerNum == 5) {                       //Displays a different message when they reach max players
+                System.out.println("Enter player " + (playerNum + 1) + "(last player) name");
+            } else {
+                System.out.println("Enter player " + (playerNum + 1) + " name");
+            }
+            playerName = input.nextLine();              //Assign input to player name
+            Player newPlayer = new Player(playerName);  //Assign player name to a  new player
+            addPlayer(newPlayer);                       //Adds a player to the players arraylist in game
+            playerNum++;                                //Increase player num
+        }
     }
 
     public void createDeck() {
-        Card deckCard1 = new Card();
-        deckCard1.setSuit(1);
-        deckCard1.setValue(3);
-        Card deckCard2 = new Card();
-        deckCard2.setSuit(1);
-        deckCard2.setValue(4);
-        Card deckCard3 = new Card();
-        deckCard3.setSuit(1);
-        deckCard3.setValue(5);
-        Card deckCard4 = new Card();
-        deckCard4.setSuit(1);
-        deckCard4.setValue(6);
-        deck.push(deckCard1);
-        deck.push(deckCard2);
-        deck.push(deckCard3);
-        deck.push(deckCard4);
+
     }
-    
+
     public void turn(int playerNumber) {
         drawCard();
         playCard();
     }
-    
+
     public void drawCard() {
-        
+
     }
-    
+
     public void playCard() {
-        
+
     }
 }
