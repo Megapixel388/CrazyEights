@@ -44,8 +44,23 @@ public abstract class Game {
         this.players = players;
     }
 
+    public Player getPlayer(int playerNumber) {
+        return players.get(playerNumber);
+    }
+
+    public void setPlayer(int playerNumber, Player player) {
+    }
+
     public void addPlayer(Player player) {
         this.players.add(player);
+    }
+
+    /**
+     *
+     * @return how many players there are
+     */
+    public int getNumPlayers() {
+        return players.size();
     }
 
     /**

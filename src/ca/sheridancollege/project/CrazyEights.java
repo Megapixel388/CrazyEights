@@ -20,7 +20,8 @@ public class CrazyEights extends Game {
     //Deck is a stack instead of GroupOfCards, 
     //because the pop method is good for drawing cards
     //There is only one deck so it can be declared here
-    private ArrayList<GroupOfCards> hands;
+
+    //private ArrayList<GroupOfCards> hands;
     private boolean isWinner;
     private Scanner input;
 
@@ -29,6 +30,7 @@ public class CrazyEights extends Game {
         isWinner = false;   //This will update when a player wins
         setPlayers();       //Adds players to the game
         createDeck();       //Creates the deck
+        deal();
         turn(0);
     }
 
@@ -65,6 +67,14 @@ public class CrazyEights extends Game {
         Collections.shuffle(deck);
     }
 
+    public void deal() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < getNumPlayers(); j++) {
+                //Put code in here to give player j 1 card
+            }
+        }
+    }
+
     public void turn(int playerNumber) {
         drawCard();
         playCard();
@@ -77,4 +87,5 @@ public class CrazyEights extends Game {
     public void playCard() {
 
     }
+
 }

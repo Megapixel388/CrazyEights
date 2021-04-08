@@ -11,9 +11,11 @@ package ca.sheridancollege.project;
  *
  * @author dancye, 2018
  */
+
 public class Player {
 
     private String playerID; //the unique ID for this player
+    private GroupOfCards hand;
 
     /**
      * A constructor that allows you to set the player's unique ID
@@ -22,6 +24,10 @@ public class Player {
      */
     public Player(String name) {
         playerID = name;
+    }
+    
+    public Player(GroupOfCards hand) {
+        this.hand = hand;
     }
 
     /**
@@ -38,6 +44,14 @@ public class Player {
      */
     public void setPlayerID(String givenID) {
         playerID = givenID;
+    }
+    
+    public GroupOfCards getHand() {
+        return hand;
+    }
+    
+    public void setHand(GroupOfCards hand) {
+        this.hand = hand;
     }
 
     /**
