@@ -76,6 +76,7 @@ public class CrazyEights extends Game {
                                         (getPlayer(j). //the current player's
                                         getHand(). //hand but
                                                 addCard(deck.pop())))); //Add a card to it off the top of the deck
+                System.out.println(getPlayer(j).getHand().getCard(i));
             }
         }
     }
