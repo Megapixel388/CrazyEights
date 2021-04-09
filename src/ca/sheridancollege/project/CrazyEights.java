@@ -15,7 +15,7 @@ import java.util.Scanner;
  * @author obris
  */
 public class CrazyEights extends Game {
-    
+
     CrazyEights(String givenName) {
         super(givenName);
     }
@@ -74,24 +74,24 @@ public class CrazyEights extends Game {
     public void deal() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < getNumPlayers(); j++) {
-                setPlayer(j, //Set this player
-                        getPlayer(j).//to themselves but...
-                                setHand(//set their hand to...
-                                        (getPlayer(j). //the current player's
-                                        getHand(). //hand but
-                                                addCard(deck.pop())))); //Add a card to it off the top of the deck
+                drawCard(j);
                 System.out.println(getPlayer(j).getHand().getCard(i));
             }
         }
     }
 
-    public void turn(int playerNumber) {
-        drawCard();
+    public void turn(int playerNum) {
+        drawCard(playerNum);
         playCard();
     }
 
-    public void drawCard() {
-
+    public void drawCard(int playerNum) {
+        setPlayer(playerNum, //Set this player
+                getPlayer(playerNum).//to themselves but...
+                        setHand(//set their hand to...
+                                (getPlayer(playerNum). //the current player's
+                                        getHand(). //hand but
+                                        addCard(deck.pop())))); //Add a card to it off the top of the deck
     }
 
     public void playCard() {
