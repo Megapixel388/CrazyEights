@@ -15,6 +15,10 @@ import java.util.Scanner;
  * @author obris
  */
 public class CrazyEights extends Game {
+    
+    CrazyEights(String givenName) {
+        super(givenName);
+    }
 
     private Stack<Card> deck;
     //Deck is a stack instead of GroupOfCards, 
