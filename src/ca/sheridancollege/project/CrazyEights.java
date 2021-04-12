@@ -109,13 +109,10 @@ public class CrazyEights extends Game {
     public GroupOfCards checkCards(int playerNum, Card topCard) {
         GroupOfCards hand = getPlayer(playerNum).getHand();                 //Make a hand so you don't have to type getPlayer(playerNum).getHand(); every time
         GroupOfCards playable = new GroupOfCards();                         // This will hold which cards in the player's hand are playable
-        //boolean match = false;
-        //int cardNum = 0;
         for (int i = 0; i < hand.getSize(); i++) {                          //Loop through the player's hand
-            if ((hand.getCard(i).getValue() == topCard.getValue()) //If the card matches the value...
-                    || (hand.getCard(i).getSuit() == topCard.getSuit()) //suit...
+            if ((hand.getCard(i).getValue() == topCard.getValue())          //If the card matches the value...
+                    || (hand.getCard(i).getSuit() == topCard.getSuit())     //suit...
                     || (hand.getCard(i).getValue() == 7)) {                 // or is an 8
-                //match = true;
                 playable.addCard(hand.getCard(i));                          //Add the playable card to the list
             }
         }
@@ -153,18 +150,18 @@ public class CrazyEights extends Game {
                             + cards.getCard(i).toString());                     //Displays them to the user
                 }
                 //
-                int chosenCard = input.nextInt() - 1;                           //Take the input of the user
+                int playedCardNum = input.nextInt() - 1;                           //Take the input of the user
+                playedCard = cards.getCard(playedCardNum);                         //Assign it to the played card
                 //Remove card from their hand
-                removeCard(playerNum, cards.getCard(chosenCard));
+                removeCard(playerNum, playedCard);
                 //In case of 8
-                if (cards.getCard(chosenCard).getValue() == 7) {            //If it's an 8!
-                    System.out.println("Crazy Eight! Enter suit number:\n " //Prompt to pick a suit
+                if (playedCard.getValue() == 7) {                //If it's an 8!
+                    System.out.println("Crazy Eight! Enter suit number:\n "     //Prompt to pick a suit
                             + "1. Hearts\n2. Diamonds\n3. Spades\n4. Clubs");
-                    cards.getCard(chosenCard).setSuit(input.nextInt());         //Set the suit of the card to the new choice
+                    playedCard.setSuit(input.nextInt());         //Set the suit of the card to the new choice
                 }
                 //
-                System.out.println(cards.getCard(chosenCard).toString() + " was played");
-                playedCard = cards.getCard(chosenCard);                         //Set the played card to the card chosen
+                System.out.println(playedCard.toString() + " was played");
                 validInput = true;                                              //Set the input as valid, ending the loop
             } catch (Exception e) {                                             //If that card does not exist, report error and start the loop again
                 System.out.println("Not a valid number!");
