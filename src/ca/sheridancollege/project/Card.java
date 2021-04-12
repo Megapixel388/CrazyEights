@@ -20,7 +20,7 @@ public class Card {
     private int value;//1-13
     //private String valueString;
 
-    public static final String[] SUITS = {"Hearts", "Diamonds", "Spades", "Clubs"};
+    public static final String[] SUITS = {"Hearts", "Diamonds", "Spades", "Clubs", "Craziness"};
 
     /**
      * Students should implement this method for their specific children classes
@@ -54,6 +54,9 @@ public class Card {
         //Update to take face cards into account later
         //valueString = Integer.toString(value);
         this.value = value;
+        if (value == 7) {
+            this.suit = 4; //Usually only goes up to 3, so eights get a special suit to themselves 
+        }
     }
 
     public int getValue() {

@@ -16,12 +16,12 @@ import java.util.Scanner;
  */
 public class CrazyEights extends Game {
 
+    private boolean isWinner;
+    private GroupOfCards deck;
+
     CrazyEights(String givenName) {
         super(givenName);
     }
-
-    private boolean isWinner;
-    private GroupOfCards deck;
 
     @Override
     public void play() throws Exception {
@@ -45,6 +45,11 @@ public class CrazyEights extends Game {
 
     @Override
     public void declareWinner() {
+        for (int i = 0; i < getNumPlayers(); i++){
+            if (getPlayer(i).getHand().getSize() < 1) {
+                System.out.println(getPlayer(i).getPlayerID() + " wins!!!");
+            }
+        }
     }
 
     public void setPlayers() {
@@ -88,11 +93,14 @@ public class CrazyEights extends Game {
 
     public Card turn(int playerNum, Card topCard) throws Exception {
         System.out.println("Top card:\n" + deck.getCard(deck.getSize()));   //Display the top card
-        GroupOfCards playable = checkCards(playerNum, topCard);             //Check which cards are playable
-        if (playable.getSize() > 0) {                                       //If the size of the hand of playable cards is more than 0
-            topCard = playCard(playable);                                   //Allow the user to play a card, and set it to the top of the pile
+        GroupOfCards playables = checkCards(playerNum, topCard);            //Check which cards are playable
+        if (playables.getSize() > 0) {                                      //If the size of the hand of playable cards is more than 0
+            topCard = playCard(playables);                                  //Allow the user to play a card, and set it to the top of the pile
         } else {                                                            //Or else
             drawCard(playerNum);                                            //Make them draw a card
+        }
+        if (getPlayer(playerNum).getHand().getSize() == 0) {                //If the player has no cards lef
+            isWinner = true;                                                //They win!
         }
         return topCard;                                                     //Return the new top card
     }
@@ -122,13 +130,13 @@ public class CrazyEights extends Game {
 //                                (getPlayer(playerNum). //the current player's
 //                                        getHand(). //hand but
 //                                        addCard(deck.pop())))); //Add a card to it off the top of the deck
-
+//
         Player tempPlayer = getPlayer(playerNum);       //Make new temporary player; a copy of whoever's drawing
         GroupOfCards tempHand = tempPlayer.getHand();   //Make a copy of their hand too
         tempHand.addCard(deck.popCard());               //Add a card to that hand
         tempPlayer.setHand(tempHand);                   //Set the temp player's hand to that
         setPlayer(playerNum, tempPlayer);               //Set the original player to the temp's state
-                                                        //This works better than the mess up there, but still sucks
+        //This works better than the mess up there, but still sucks
     }
 
     public Card playCard(GroupOfCards cards) throws Exception {
@@ -140,13 +148,14 @@ public class CrazyEights extends Game {
             try {
                 System.out.println("Pick a card from your hand (type the number)");
                 for (int i = 0; i < cards.getSize(); i++) {                     //Loops through the list of playable cards
-                    System.out.println((i - 1) + ". " + cards.getCard(i));      //Displays them to the user
+                    System.out.println((i + 1) + ". "
+                            + cards.getCard(i).toString());                     //Displays them to the user
                 }
                 //
-                int chosenCard = input.nextInt()-1;                             //Take the input of the user
+                int chosenCard = input.nextInt() - 1;                           //Take the input of the user
                 //In case of 8
                 if (cards.getCard(chosenCard - 1).getValue() == 7) {            //If it's an 8!
-                    System.out.println("Crazy Eight! Enter suit number:\n "     //Prompt to pick a suit
+                    System.out.println("Crazy Eight! Enter suit number:\n " //Prompt to pick a suit
                             + "1. Hearts\n2. Diamonds\n3. Spades\n4. Clubs");
                     cards.getCard(chosenCard).setSuit(input.nextInt());         //Set the suit of the card to the new choice
                 }
