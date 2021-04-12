@@ -21,6 +21,10 @@ public class GroupOfCards {
     private ArrayList<Card> cards;
     private int size;//the size of the grouping
 
+    public GroupOfCards() {
+
+    }
+
     public GroupOfCards(int givenSize) {
         size = givenSize;
     }
@@ -50,11 +54,15 @@ public class GroupOfCards {
         cards.remove(card);
     }
 
+    public Card popCard() {
+        return cards.remove(cards.size() - 1);
+    }
+
     /**
      * @return the size of the group of cards
      */
     public int getSize() {
-        return size;
+        return cards.size();
     }
 
     /**

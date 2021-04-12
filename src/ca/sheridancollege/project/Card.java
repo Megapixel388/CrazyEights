@@ -44,8 +44,8 @@ public class Card {
     public int getSuit() {
         return suit;
     }
-    
-    public String getSuitName(int suit) {
+
+    public String getSuitName() {
         return SUITS[suit];
     }
 
@@ -59,8 +59,28 @@ public class Card {
     public int getValue() {
         return value;
     }
+
+    public String getValueName() {
+        String valueName;
+        switch (value) {
+            case 10:
+                valueName = "Jack";
+                break;
+            case 11:
+                valueName = "Queen";
+                break;
+            case 12:
+                valueName = "King";
+                break;
+            default:
+                valueName = Integer.toString(value);
+        }
+        return valueName;
+    }
+
+    @Override
+    public String toString() {
+        return (getValueName() + " of " + getSuitName());
+    }
+
 }
-//    @Override
-//    public String toString();
-//
-//}
