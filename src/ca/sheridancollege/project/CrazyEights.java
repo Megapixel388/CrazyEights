@@ -46,7 +46,7 @@ public class CrazyEights extends Game {
 
     @Override
     public void declareWinner() {
-        for (int i = 0; i < getNumPlayers(); i++){                              //Cycle through the players
+        for (int i = 0; i < getNumPlayers(); i++) {                              //Cycle through the players
             if (getPlayer(i).getHand().getSize() < 1) {                         //If the player has fewer than 1 card
                 System.out.println(getPlayer(i).getPlayerID() + " wins!!!");    //Declare them as the winner
             }
@@ -96,7 +96,7 @@ public class CrazyEights extends Game {
         System.out.println("Top card:\n" + deck.getCard(deck.getSize()));   //Display the top card
         GroupOfCards playables = checkCards(playerNum, topCard);            //Check which cards are playable
         if (playables.getSize() > 0) {                                      //If the size of the hand of playable cards is more than 0
-            topCard = playCard(playables);                                  //Allow the user to play a card, and set it to the top of the pile
+            topCard = playCard(playerNum, playables);                                  //Allow the user to play a card, and set it to the top of the pile
         } else {                                                            //Or else
             drawCard(playerNum);                                            //Make them draw a card
         }
@@ -112,8 +112,8 @@ public class CrazyEights extends Game {
         //boolean match = false;
         //int cardNum = 0;
         for (int i = 0; i < hand.getSize(); i++) {                          //Loop through the player's hand
-            if ((hand.getCard(i).getValue() == topCard.getValue())          //If the card matches the value...
-                    || (hand.getCard(i).getSuit() == topCard.getSuit())     //suit...
+            if ((hand.getCard(i).getValue() == topCard.getValue()) //If the card matches the value...
+                    || (hand.getCard(i).getSuit() == topCard.getSuit()) //suit...
                     || (hand.getCard(i).getValue() == 7)) {                 // or is an 8
                 //match = true;
                 playable.addCard(hand.getCard(i));                          //Add the playable card to the list
@@ -140,7 +140,7 @@ public class CrazyEights extends Game {
         //This works better than the mess up there, but still sucks
     }
 
-    public Card playCard(GroupOfCards cards) throws Exception {
+    public Card playCard(int playerNum, GroupOfCards cards) throws Exception {
         boolean validInput = false;                                             //This turns true if the card played is valid
         Card playedCard = new Card();                                           //This stores the card that is eventually returned
 
@@ -154,8 +154,10 @@ public class CrazyEights extends Game {
                 }
                 //
                 int chosenCard = input.nextInt() - 1;                           //Take the input of the user
+                //Remove card from their hand
+                removeCard(playerNum, cards.getCard(chosenCard));
                 //In case of 8
-                if (cards.getCard(chosenCard - 1).getValue() == 7) {            //If it's an 8!
+                if (cards.getCard(chosenCard).getValue() == 7) {            //If it's an 8!
                     System.out.println("Crazy Eight! Enter suit number:\n " //Prompt to pick a suit
                             + "1. Hearts\n2. Diamonds\n3. Spades\n4. Clubs");
                     cards.getCard(chosenCard).setSuit(input.nextInt());         //Set the suit of the card to the new choice
@@ -171,4 +173,11 @@ public class CrazyEights extends Game {
         return playedCard;                                                      //Return the played card
     }
 
+    public void removeCard(int playerNum, Card card) {
+        Player tempPlayer = getPlayer(playerNum);       //Make new temporary player; a copy of whoever's drawing
+        GroupOfCards tempHand = tempPlayer.getHand();   //Make a copy of their hand too
+        tempHand.removeCard(card);                      //Remove card from that hand
+        tempPlayer.setHand(tempHand);                   //Set the temp player's hand to that
+        setPlayer(playerNum, tempPlayer);               //Set the original player to the temp's state
+    }
 }
