@@ -41,13 +41,14 @@ public class CrazyEights extends Game {
                 currentPlayer++;
             }
         }
+        declareWinner();                            //When getWinner is true, finally declare the winner
     }
 
     @Override
     public void declareWinner() {
-        for (int i = 0; i < getNumPlayers(); i++){
-            if (getPlayer(i).getHand().getSize() < 1) {
-                System.out.println(getPlayer(i).getPlayerID() + " wins!!!");
+        for (int i = 0; i < getNumPlayers(); i++){                              //Cycle through the players
+            if (getPlayer(i).getHand().getSize() < 1) {                         //If the player has fewer than 1 card
+                System.out.println(getPlayer(i).getPlayerID() + " wins!!!");    //Declare them as the winner
             }
         }
     }

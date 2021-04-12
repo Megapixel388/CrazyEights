@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         CrazyEights newGame = new CrazyEights("CrazyEights");
         newGame.play();
+        System.out.println("End");
     }
     
 }
